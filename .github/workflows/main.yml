@@ -21,9 +21,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # Gradle Environment ကို Setup လုပ်ခြင်း (gradlew မလိုတော့ပါ)
+      # Gradle Version ကို Android project နဲ့ ကိုက်ညီအောင် 8.2 သို့ သတ်မှတ်ခြင်း
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.2'
 
       # Debug APK Build ဆော့ခြင်း
       - name: Build debug APK
