@@ -20,28 +20,27 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-          cache: gradle
 
-      # gradlew ကို execute လုပ်ပိုင်ခွင့် ပေးခြင်း
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+      # Gradle Environment ကို Setup လုပ်ခြင်း (gradlew မလိုတော့ပါ)
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-      # Debug APK ဆောက်ခြင်း
+      # Debug APK Build ဆော့ခြင်း
       - name: Build debug APK
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
 
-      # Release APK ဆောက်ခြင်း
+      # Release APK Build ဆော့ခြင်း
       - name: Build release APK
-        run: ./gradlew assembleRelease
+        run: gradle assembleRelease
 
-      # Debug APK ကို ဒေါင်းလုဒ်ဆွဲနိုင်ရန် Upload တင်ခြင်း
+      # Debug APK Upload တင်ခြင်း
       - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      # Release APK ကို ဒေါင်းလုဒ်ဆွဲနိုင်ရန် Upload တင်ခြင်း
+      # Release APK Upload တင်ခြင်း
       - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
         with:
