@@ -22,26 +22,26 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      # 1. Gradlew မရှိပါက အလိုအလျောက် ထုတ်ပေးမည့် Step ထည့်သွင်းထားပါသည်
-      - name: Setup Gradle Wrapper
-        run: gradle wrapper
-
+      # gradlew ကို execute လုပ်ပိုင်ခွင့် ပေးခြင်း
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      # 2. Build မဆော့ခင် Gradle Dependencies များကို Download ဆွဲပါမည်
+      # Debug APK ဆောက်ခြင်း
       - name: Build debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug
 
+      # Release APK ဆောက်ခြင်း
       - name: Build release APK
-        run: ./gradlew assembleRelease --stacktrace
+        run: ./gradlew assembleRelease
 
+      # Debug APK ကို ဒေါင်းလုဒ်ဆွဲနိုင်ရန် Upload တင်ခြင်း
       - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
+      # Release APK ကို ဒေါင်းလုဒ်ဆွဲနိုင်ရန် Upload တင်ခြင်း
       - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
         with:
